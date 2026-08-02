@@ -644,11 +644,11 @@
         <select id="pathSelector" class="url-input-select" onchange="updateLaunchLink()">
           <option value="/doctor-ui">/doctor-ui — Modern Medical UI Platform</option>
           <option value="/chemical">/chemical — Chemical Solutions & Lab</option>
-          <option value="/architect">/architect — 3D Architectural Studio</option>
-          <option value="/interior">/interior — Luxury Interior Design</option>
-          <option value="/pizza">/pizza — Artisan Pizza Restaurant</option>
+          <option value="https://jenil-architect-demo.vercel.app/">Architect Studio — 3D Architectural Studio</option>
+          <option value="https://jenil-interior-demo.vercel.app/">Interior Design — Luxury Interior Design 3D</option>
+          <option value="https://jenil-restaurant-demo.vercel.app/">Pizza Restaurant — Artisan Pizza Restaurant</option>
         </select>
-        <a id="launchBtn" href="/doctor-ui" class="btn-launch">
+        <a id="launchBtn" href="/doctor-ui" class="btn-launch" target="_blank">
           Go <i class="fa-solid fa-arrow-right"></i>
         </a>
       </div>
@@ -723,7 +723,7 @@
       <div class="card" data-category="3d">
         <div class="card-banner">
           <div class="card-banner-bg" style="background-image: linear-gradient(to bottom, rgba(245, 158, 11, 0.2), rgba(15, 23, 42, 0.9)), url('architect/public/hero.jpg'); background-color: #78350f;"></div>
-          <span class="card-path-tag">/architect</span>
+          <span class="card-path-tag">Architect Vercel App</span>
           <span class="card-category-badge" style="background: #f59e0b;">3D & Arch</span>
         </div>
         <div class="card-content">
@@ -735,10 +735,10 @@
             <span class="tech-tag">JavaScript</span>
           </div>
           <div class="card-actions">
-            <a href="/architect" class="btn-open">
+            <a href="https://jenil-architect-demo.vercel.app/" target="_blank" class="btn-open">
               Open Website <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
-            <button class="btn-copy" onclick="copyPath('/architect')" title="Copy URL Path">
+            <button class="btn-copy" onclick="copyPath('https://jenil-architect-demo.vercel.app/')" title="Copy URL Path">
               <i class="fa-regular fa-copy"></i>
             </button>
           </div>
@@ -749,7 +749,7 @@
       <div class="card" data-category="3d">
         <div class="card-banner">
           <div class="card-banner-bg" style="background-image: linear-gradient(to bottom, rgba(236, 72, 153, 0.2), rgba(15, 23, 42, 0.9)), url('3d-web/Interior_DEsign/public/hero.jpg'); background-color: #831843;"></div>
-          <span class="card-path-tag">/interior</span>
+          <span class="card-path-tag">Interior Vercel App</span>
           <span class="card-category-badge" style="background: #ec4899;">Interior 3D</span>
         </div>
         <div class="card-content">
@@ -761,10 +761,10 @@
             <span class="tech-tag">3D Showcase</span>
           </div>
           <div class="card-actions">
-            <a href="/interior" class="btn-open">
+            <a href="https://jenil-interior-demo.vercel.app/" target="_blank" class="btn-open">
               Open Website <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
-            <button class="btn-copy" onclick="copyPath('/interior')" title="Copy URL Path">
+            <button class="btn-copy" onclick="copyPath('https://jenil-interior-demo.vercel.app/')" title="Copy URL Path">
               <i class="fa-regular fa-copy"></i>
             </button>
           </div>
@@ -775,7 +775,7 @@
       <div class="card" data-category="dining">
         <div class="card-banner">
           <div class="card-banner-bg" style="background-image: linear-gradient(to bottom, rgba(239, 68, 68, 0.2), rgba(15, 23, 42, 0.9)), url('3d-web/Pizza-restaurant/public/pizza.jpg'); background-color: #7f1d1d;"></div>
-          <span class="card-path-tag">/pizza</span>
+          <span class="card-path-tag">Restaurant Vercel App</span>
           <span class="card-category-badge" style="background: #ef4444;">Dining</span>
         </div>
         <div class="card-content">
@@ -787,10 +787,10 @@
             <span class="tech-tag">Restaurant</span>
           </div>
           <div class="card-actions">
-            <a href="/pizza" class="btn-open">
+            <a href="https://jenil-restaurant-demo.vercel.app/" target="_blank" class="btn-open">
               Open Website <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
-            <button class="btn-copy" onclick="copyPath('/pizza')" title="Copy URL Path">
+            <button class="btn-copy" onclick="copyPath('https://jenil-restaurant-demo.vercel.app/')" title="Copy URL Path">
               <i class="fa-regular fa-copy"></i>
             </button>
           </div>
@@ -830,11 +830,11 @@
     }
 
     function copyPath(path) {
-      const fullUrl = window.location.origin + path;
+      const fullUrl = path.startsWith('http') ? path : window.location.origin + path;
       navigator.clipboard.writeText(fullUrl).then(() => {
-        showToast('Copied full URL: ' + fullUrl);
+        showToast('Copied URL: ' + fullUrl);
       }).catch(() => {
-        showToast('Path copied: ' + path);
+        showToast('URL copied: ' + path);
       });
     }
 

@@ -42,6 +42,10 @@
     {
       "source": "/pizza/(.*)",
       "destination": "/3d-web/Pizza-restaurant/dist/$1"
+    },
+    {
+      "source": "/frames/(.*)",
+      "destination": "/3d-web/Interior_DEsign/dist/frames/$1"
     }
   ]
 }

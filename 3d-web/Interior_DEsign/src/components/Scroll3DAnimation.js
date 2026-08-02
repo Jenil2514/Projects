@@ -8,7 +8,7 @@ const SEQUENCES = [
         name: '3D Design I — Architectural Living Suite',
         subtitle: 'Dynamic spatial flow & light orientation across modern Scandinavian living',
         totalFrames: 156,
-        folder: '/frames/project4_webp',
+        folder: 'frames/project4_webp',
         extension: 'webp'
     },
     {
@@ -16,7 +16,7 @@ const SEQUENCES = [
         name: '3D Design II — Luxury Lounge & Penthouse',
         subtitle: 'Seamless 360° rotation highlighting bespoke materials & organic contours',
         totalFrames: 145,
-        folder: '/frames/project6_webp',
+        folder: 'frames/project6_webp',
         extension: 'webp'
     }
 ];

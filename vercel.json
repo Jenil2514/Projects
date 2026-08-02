@@ -1,6 +1,6 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false,
+  "trailingSlash": true,
   "rewrites": [
     {
       "source": "/doctor-ui",
@@ -36,11 +36,11 @@
     },
     {
       "source": "/pizza",
-      "destination": "/3d-web/Pizza-restaurant/index.html"
+      "destination": "/3d-web/Pizza-restaurant/dist/index.html"
     },
     {
       "source": "/pizza/(.*)",
-      "destination": "/3d-web/Pizza-restaurant/$1"
+      "destination": "/3d-web/Pizza-restaurant/dist/$1"
     }
   ]
 }

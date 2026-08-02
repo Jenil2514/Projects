@@ -1,0 +1,10 @@
+{
+  "name": "websites-multi-portal",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build:interior": "cd 3d-web/Interior_DEsign && npm install --include=dev && npm run build",
+    "build:pizza": "cd 3d-web/Pizza-restaurant && npm install --include=dev && npm run build",
+    "build": "npm run build:interior && npm run build:pizza"
+  }
+}

@@ -799,31 +799,7 @@
 
     </div>
 
-    <!-- How Vercel Multi-Project Routing Works -->
-    <div class="info-section">
-      <h2><i class="fa-solid fa-circle-info"></i> How Vercel Subpath Routing Works</h2>
-      <p style="color: var(--text-muted);">
-        You don't need multiple Vercel projects or domain names. Here is how your <code>vercel.json</code> rewrites enable single-domain hosting:
-      </p>
 
-      <div class="info-grid">
-        <div class="info-step">
-          <div class="step-num">1</div>
-          <div class="step-title">Single Repository Root</div>
-          <div class="step-desc">All website projects reside inside your main folder. Root <code>index.html</code> acts as this master launchpad.</div>
-        </div>
-        <div class="info-step">
-          <div class="step-num">2</div>
-          <div class="step-title">Vercel Rewrites</div>
-          <div class="step-desc">The <code>vercel.json</code> file maps routes like <code>/pizza</code> directly to <code>/3d/3d-web/Pizza-restaurant/index.html</code>.</div>
-        </div>
-        <div class="info-step">
-          <div class="step-num">3</div>
-          <div class="step-title">Add New Projects</div>
-          <div class="step-desc">To add another site (e.g. <code>/portfolio</code>), add its folder and a 2-line rewrite rule in <code>vercel.json</code>!</div>
-        </div>
-      </div>
-    </div>
 
     <!-- Toast Notification -->
     <div id="toast" class="toast">

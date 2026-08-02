@@ -1,0 +1,46 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/doctor-ui",
+      "destination": "/doctor-ui/index.html"
+    },
+    {
+      "source": "/doctor-ui/(.*)",
+      "destination": "/doctor-ui/$1"
+    },
+    {
+      "source": "/chemical",
+      "destination": "/chemical/index.html"
+    },
+    {
+      "source": "/chemical/(.*)",
+      "destination": "/chemical/$1"
+    },
+    {
+      "source": "/architect",
+      "destination": "/3d-web/architect/index.html"
+    },
+    {
+      "source": "/architect/(.*)",
+      "destination": "/3d-web/architect/$1"
+    },
+    {
+      "source": "/interior",
+      "destination": "/3d-web/Interior_DEsign/dist/index.html"
+    },
+    {
+      "source": "/interior/(.*)",
+      "destination": "/3d-web/Interior_DEsign/dist/$1"
+    },
+    {
+      "source": "/pizza",
+      "destination": "/3d-web/Pizza-restaurant/index.html"
+    },
+    {
+      "source": "/pizza/(.*)",
+      "destination": "/3d-web/Pizza-restaurant/$1"
+    }
+  ]
+}

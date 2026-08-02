@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraMed Health | Precision Medicine & Compassionate Care</title>
+    <meta name="description" content="AuraMed Health offers world-class, JCI-accredited medical care built on trust, diagnostic precision, sterile cleanliness, and patient-centered compassion.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="clean-white-theme patient-landing">
+    <!-- Top Announcement Bar -->
+    <div class="top-announcement-bar">
+        <div class="container flex-between">
+            <div class="announcement-left">
+                <span class="badge badge-success"><i class="fa-solid fa-shield-check"></i> JCI Accredited</span>
+                <span class="text-sm"><i class="fa-solid fa-sparkles text-warning"></i> Now offering 24/7 Virtual Telehealth & AI Instant Triage Consultations.</span>
+            </div>
+            <div class="announcement-right">
+                <a href="tel:+18005550199" class="phone-link"><i class="fa-solid fa-phone"></i> 24/7 Helpline: <strong>1-800-555-0199</strong></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="patient-header">
+        <div class="container flex-between">
+            <a href="index.html" class="brand-logo text-decoration-none">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="brand-name">Aura<span class="accent-text">Med</span></span>
+                    <span class="brand-sub">Health & Medical Center</span>
+                </div>
+            </a>
+
+            <nav class="patient-nav">
+                <a href="#why-us" class="nav-link">Why Choose Us</a>
+                <a href="#pillars" class="nav-link">Pillars of Care</a>
+                <a href="#doctors" class="nav-link">Find a Specialist</a>
+                <a href="#technology" class="nav-link">Precision & Tech</a>
+                <a href="#reviews" class="nav-link">Patient Reviews</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+            </nav>
+
+            <div class="header-actions">
+                <!-- Doctor Portal Workspace Link -->
+                <a href="dashboard.html" class="btn btn-outline doctor-portal-link" title="Switch to Doctor Clinical Dashboard">
+                    <i class="fa-solid fa-user-doctor text-primary"></i>
+                    <span>Doctor Portal</span>
+                </a>
+
+                <button class="btn btn-primary btn-book-appointment" id="hero-book-trigger">
+                    <i class="fa-regular fa-calendar-check"></i>
+                    <span>Book Appointment</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-grid">
+                <!-- Hero Left Copy -->
+                <div class="hero-content">
+                    <div class="pill-tag mb-3">
+                        <i class="fa-solid fa-shield-heart text-primary"></i>
+                        <span>Uncompromising Standard of Medical Care</span>
+                    </div>
+
+                    <h1 class="hero-title">
+                        Precision Medicine.<br>
+                        <span class="text-gradient">Rooted in Trust & Care.</span>
+                    </h1>
+
+                    <p class="hero-subtitle">
+                        Experience healthcare crafted with surgical precision, ultra-sterile clinical cleanliness, and deeply compassionate medical care. Designed around your peace of mind.
+                    </p>
+
+                    <!-- Quick Appointment Finder Bar -->
+                    <div class="quick-booking-card">
+                        <form id="hero-quick-search-form" class="quick-booking-form">
+                            <div class="form-group-inline">
+                                <label><i class="fa-solid fa-stethoscope text-primary"></i> Specialty</label>
+                                <select class="form-select-minimal" id="quick-specialty">
+                                    <option value="cardiology">Cardiology & Heart</option>
+                                    <option value="neurology">Neurology & Spine</option>
+                                    <option value="pediatrics">Pediatrics & Family</option>
+                                    <option value="general">General Medicine</option>
+                                </select>
+                            </div>
+
+                            <div class="form-divider"></div>
+
+                            <div class="form-group-inline">
+                                <label><i class="fa-regular fa-calendar text-primary"></i> Visit Date</label>
+                                <input type="date" class="form-input-minimal" id="quick-date" value="2026-08-03">
+                            </div>
+
+                            <div class="form-divider"></div>
+
+                            <div class="form-group-inline">
+                                <label><i class="fa-solid fa-video text-primary"></i> Type</label>
+                                <select class="form-select-minimal" id="quick-type">
+                                    <option value="in-person">In-Clinic Visit</option>
+                                    <option value="telehealth">24/7 Telehealth</option>
+                                </select>
+                            </div>
+
+                            <button type="button" class="btn btn-primary btn-search-hero" id="quick-search-btn">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <span>Find Doctor</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Trust Checklist Badges -->
+                    <div class="hero-trust-list">
+                        <div class="trust-item"><i class="fa-solid fa-circle-check text-success"></i> 0% Hospital-Acquired Infection Rate</div>
+                        <div class="trust-item"><i class="fa-solid fa-circle-check text-success"></i> Board-Certified Physicians</div>
+                        <div class="trust-item"><i class="fa-solid fa-circle-check text-success"></i> Instant Digital Records</div>
+                    </div>
+                </div>
+
+                <!-- Hero Right Image Showcase -->
+                <div class="hero-visual">
+                    <div class="image-card-wrapper">
+                        <img src="clean_doctor_care.jpg" alt="Doctor Consultation at AuraMed Health Clinic" class="hero-main-img">
+
+                        <!-- Floating Trust Badges -->
+                        <div class="floating-badge badge-top-left">
+                            <div class="badge-icon-bg bg-success-light">
+                                <i class="fa-solid fa-sparkles text-success"></i>
+                            </div>
+                            <div>
+                                <strong class="block text-xs text-slate-900">100% Sterile Standard</strong>
+                                <span class="text-xs text-muted">UV-C & HEPA Sanitized</span>
+                            </div>
+                        </div>
+
+                        <div class="floating-badge badge-bottom-right">
+                            <div class="badge-icon-bg bg-primary-light">
+                                <i class="fa-solid fa-user-doctor text-primary"></i>
+                            </div>
+                            <div>
+                                <strong class="block text-xs text-slate-900">Top-Rated Care</strong>
+                                <span class="text-xs text-muted">⭐ 4.98/5.0 (2,400+ Reviews)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST & PRECISION METRICS STRIP -->
+    <section class="metrics-strip-section" id="why-us">
+        <div class="container">
+            <div class="metrics-strip-grid">
+                <div class="strip-item">
+                    <div class="strip-number">99.4%</div>
+                    <div class="strip-label">Diagnostic Accuracy Rate</div>
+                    <div class="strip-sub">Driven by advanced AI & DICOM imaging</div>
+                </div>
+                <div class="strip-divider"></div>
+                <div class="strip-item">
+                    <div class="strip-number">15,000+</div>
+                    <div class="strip-label">Patients Treated with Care</div>
+                    <div class="strip-sub">Across cardiology, neurology & family medicine</div>
+                </div>
+                <div class="strip-divider"></div>
+                <div class="strip-item">
+                    <div class="strip-number">&lt; 10 min</div>
+                    <div class="strip-label">Average Wait Time</div>
+                    <div class="strip-sub">Guaranteed prompt, respectful clinical care</div>
+                </div>
+                <div class="strip-divider"></div>
+                <div class="strip-item">
+                    <div class="strip-number">100%</div>
+                    <div class="strip-label">Patient Safety Score</div>
+                    <div class="strip-sub">JCI Gold Seal of Approval</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE 4 PILLARS OF AURAMED CARE -->
+    <section class="pillars-section" id="pillars">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">OUR UNCOMPROMISING STANDARDS</span>
+                <h2>Built Upon 4 Essential Pillars of Healthcare</h2>
+                <p class="section-desc">We reimagined clinical care from the ground up to guarantee absolute peace of mind, scientific clarity, and genuine human warmth.</p>
+            </div>
+
+            <div class="pillars-grid">
+                <!-- Pillar 1 -->
+                <div class="pillar-card">
+                    <div class="pillar-icon-box bg-teal">
+                        <i class="fa-solid fa-pump-soap"></i>
+                    </div>
+                    <h3>Pristine Cleanliness</h3>
+                    <p>Our clinics feature hospital-grade HEPA air filtration, continuous UV-C surface sterilization between visits, and contactless digital check-ins to ensure a 100% germ-free environment.</p>
+                    <ul class="pillar-list">
+                        <li><i class="fa-solid fa-check text-teal"></i> Zero Hospital-Acquired Infection Track Record</li>
+                        <li><i class="fa-solid fa-check text-teal"></i> Private individual consultation suites</li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="pillar-card">
+                    <div class="pillar-icon-box bg-primary">
+                        <i class="fa-solid fa-microscope"></i>
+                    </div>
+                    <h3>Diagnostic Precision</h3>
+                    <p>Leveraging high-resolution DICOM radiograph imaging, sub-second lab analytics, and AI-assisted clinical checks to detect conditions at their earliest, most treatable stages.</p>
+                    <ul class="pillar-list">
+                        <li><i class="fa-solid fa-check text-primary"></i> Same-Day Diagnostic Lab Reports</li>
+                        <li><i class="fa-solid fa-check text-primary"></i> Dual-Physician Radiology Review</li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="pillar-card">
+                    <div class="pillar-icon-box bg-indigo">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
+                    <h3>Compassionate Care</h3>
+                    <p>You are never a number. Our physicians spend dedicated time listening to your concerns, answering questions thoroughly, and co-creating personalized treatment plans.</p>
+                    <ul class="pillar-list">
+                        <li><i class="fa-solid fa-check text-indigo"></i> Unhurried, 30-minute doctor consultations</li>
+                        <li><i class="fa-solid fa-check text-indigo"></i> Transparent upfront pricing & insurance assistance</li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 4 -->
+                <div class="pillar-card">
+                    <div class="pillar-icon-box bg-sky">
+                        <i class="fa-solid fa-laptop-medical"></i>
+                    </div>
+                    <h3>24/7 Digital Access</h3>
+                    <p>Access your complete medical records, signed E-Prescriptions, vital trends, and lab results anytime through our secure, HIPAA-compliant patient portal.</p>
+                    <ul class="pillar-list">
+                        <li><i class="fa-solid fa-check text-sky"></i> E-Prescriptions sent directly to your pharmacy</li>
+                        <li><i class="fa-solid fa-check text-sky"></i> 24/7 Direct Telehealth messaging with your care team</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MEET OUR SPECIALISTS -->
+    <section class="doctors-section" id="doctors">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">WORLD-CLASS MEDICAL FACULTY</span>
+                <h2>Meet Our Board-Certified Specialists</h2>
+                <p class="section-desc">Our distinguished team of physicians bring decades of clinical excellence from top medical institutions.</p>
+            </div>
+
+            <!-- Doctor Category Filter Tabs -->
+            <div class="doctor-filter-tabs" id="doctor-tabs">
+                <button class="doc-tab active" data-dept="all">All Specialists</button>
+                <button class="doc-tab" data-dept="cardiology">Cardiology</button>
+                <button class="doc-tab" data-dept="neurology">Neurology</button>
+                <button class="doc-tab" data-dept="pediatrics">Pediatrics</button>
+                <button class="doc-tab" data-dept="general">Internal Medicine</button>
+            </div>
+
+            <!-- Doctor Roster Cards Grid -->
+            <div class="doctors-grid" id="doctors-grid">
+                <!-- Dr 1 -->
+                <div class="doctor-card" data-dept="cardiology">
+                    <div class="doc-img-container">
+                        <img src="doc_sarah_jenkins.jpg" alt="Dr. Sarah Jenkins" class="doc-img">
+                        <span class="doc-status-badge"><i class="fa-solid fa-circle text-success"></i> Available Today</span>
+                    </div>
+                    <div class="doc-body">
+                        <div class="flex-between mb-1">
+                            <span class="doc-dept-badge">Cardiology</span>
+                            <span class="doc-rating"><i class="fa-solid fa-star text-warning"></i> 4.99 (480 reviews)</span>
+                        </div>
+                        <h3 class="doc-name">Dr. Sarah Jenkins, MD</h3>
+                        <p class="doc-title">Chief of Cardiology • Harvard Medical Alum</p>
+                        <p class="doc-bio">Specializing in preventative cardiology, hypertension management, and advanced echocardiography with over 16 years of clinical leadership.</p>
+                        <div class="doc-footer flex-between">
+                            <div class="doc-exp"><strong>16+ Yrs</strong> Experience</div>
+                            <button class="btn btn-sm btn-primary book-specific-doc" data-doctor="Dr. Sarah Jenkins (Cardiology)">
+                                <i class="fa-regular fa-calendar-plus"></i> Book Consult
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dr 2 -->
+                <div class="doctor-card" data-dept="neurology">
+                    <div class="doc-img-container">
+                        <img src="doc_marcus_vance.jpg" alt="Dr. Marcus Vance" class="doc-img">
+                        <span class="doc-status-badge"><i class="fa-solid fa-circle text-success"></i> Available Tomorrow</span>
+                    </div>
+                    <div class="doc-body">
+                        <div class="flex-between mb-1">
+                            <span class="doc-dept-badge">Neurology</span>
+                            <span class="doc-rating"><i class="fa-solid fa-star text-warning"></i> 4.97 (310 reviews)</span>
+                        </div>
+                        <h3 class="doc-name">Dr. Marcus Vance, MD</h3>
+                        <p class="doc-title">Director of Neuro-Diagnostics • Johns Hopkins</p>
+                        <p class="doc-bio">Expert in migraine management, stroke prevention, and diagnostic neuro-imaging using state-of-the-art brain scanning technology.</p>
+                        <div class="doc-footer flex-between">
+                            <div class="doc-exp"><strong>14+ Yrs</strong> Experience</div>
+                            <button class="btn btn-sm btn-primary book-specific-doc" data-doctor="Dr. Marcus Vance (Neurology)">
+                                <i class="fa-regular fa-calendar-plus"></i> Book Consult
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dr 3 -->
+                <div class="doctor-card" data-dept="pediatrics">
+                    <div class="doc-img-container">
+                        <img src="doc_elena_rostova.jpg" alt="Dr. Elena Rostova" class="doc-img">
+                        <span class="doc-status-badge"><i class="fa-solid fa-circle text-success"></i> Available Today</span>
+                    </div>
+                    <div class="doc-body">
+                        <div class="flex-between mb-1">
+                            <span class="doc-dept-badge">Pediatrics</span>
+                            <span class="doc-rating"><i class="fa-solid fa-star text-warning"></i> 4.98 (520 reviews)</span>
+                        </div>
+                        <h3 class="doc-name">Dr. Elena Rostova, MD</h3>
+                        <p class="doc-title">Lead Pediatric Specialist • Stanford Health</p>
+                        <p class="doc-bio">Dedicated to gentle, compassionate care for infants, children, and adolescents with an emphasis on preventive wellness and nutrition.</p>
+                        <div class="doc-footer flex-between">
+                            <div class="doc-exp"><strong>12+ Yrs</strong> Experience</div>
+                            <button class="btn btn-sm btn-primary book-specific-doc" data-doctor="Dr. Elena Rostova (Pediatrics)">
+                                <i class="fa-regular fa-calendar-plus"></i> Book Consult
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dr 4 -->
+                <div class="doctor-card" data-dept="general">
+                    <div class="doc-img-container">
+                        <img src="doc_james_chen.jpg" alt="Dr. James Chen" class="doc-img">
+                        <span class="doc-status-badge"><i class="fa-solid fa-circle text-success"></i> Telehealth Online</span>
+                    </div>
+                    <div class="doc-body">
+                        <div class="flex-between mb-1">
+                            <span class="doc-dept-badge">Internal Medicine</span>
+                            <span class="doc-rating"><i class="fa-solid fa-star text-warning"></i> 4.96 (390 reviews)</span>
+                        </div>
+                        <h3 class="doc-name">Dr. James Chen, MD</h3>
+                        <p class="doc-title">Senior Internal Medicine Fellow • Mayo Clinic</p>
+                        <p class="doc-bio">Specialist in complex chronic disease management, annual health screenings, and holistic preventive wellness strategies.</p>
+                        <div class="doc-footer flex-between">
+                            <div class="doc-exp"><strong>18+ Yrs</strong> Experience</div>
+                            <button class="btn btn-sm btn-primary book-specific-doc" data-doctor="Dr. James Chen (Internal Medicine)">
+                                <i class="fa-regular fa-calendar-plus"></i> Book Consult
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRECISION & TECHNOLOGY HIGHLIGHT -->
+    <section class="tech-section" id="technology">
+        <div class="container">
+            <div class="tech-card-wrapper">
+                <div class="tech-content">
+                    <span class="section-tag text-teal">ADVANCED MEDICAL TECHNOLOGY</span>
+                    <h2>Precision Diagnostics That Give You Absolute Clarity</h2>
+                    <p>Our medical center is equipped with low-radiation DICOM imaging suite, AI-assisted lab screening, and continuous remote biometrics monitoring.</p>
+
+                    <div class="tech-features-list">
+                        <div class="tech-feature-item">
+                            <i class="fa-solid fa-x-ray text-primary"></i>
+                            <div>
+                                <h4>Sub-Millimeter DICOM Imaging</h4>
+                                <p class="text-sm">High-clarity radiograph scans reviewed instantly by attending radiologists.</p>
+                            </div>
+                        </div>
+
+                        <div class="tech-feature-item">
+                            <i class="fa-solid fa-brain text-teal"></i>
+                            <div>
+                                <h4>AI-Assisted Pathology Check</h4>
+                                <p class="text-sm">Double-checks lab samples against millions of clinical data points for 99.4% accuracy.</p>
+                            </div>
+                        </div>
+
+                        <div class="tech-feature-item">
+                            <i class="fa-solid fa-shield-halved text-success"></i>
+                            <div>
+                                <h4>HIPAA & ISO-27001 Secure Records</h4>
+                                <p class="text-sm">Your health data is encrypted end-to-end and accessible anytime on your phone.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-visual">
+                    <img src="chest_xray.jpg" alt="Precision DICOM Medical Imaging Preview" class="tech-img-preview">
+                    <div class="tech-badge-overlay">
+                        <i class="fa-solid fa-circle-check text-success"></i> Diagnostic Clarity Verified
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PATIENT TESTIMONIALS SECTION -->
+    <section class="testimonials-section" id="reviews">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">PATIENT STORIES</span>
+                <h2>What Our Patients Say About Their Care</h2>
+                <p class="section-desc">Over 15,000 patients trust AuraMed for their family's health.</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars mb-2"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"The cleanliness of AuraMed blew me away. Everything felt pristine, quiet, and peaceful. Dr. Jenkins took 30 minutes to explain my heart health without rushing me."</p>
+                    <div class="patient-author">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80" alt="Eleanor Vance" class="author-img">
+                        <div>
+                            <strong>Eleanor Vance</strong>
+                            <span class="text-xs text-muted block">Cardiology Patient • Verified Review</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars mb-2"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"Getting my lab results and E-Prescription sent straight to my phone within 1 hour was amazing. The level of diagnostic precision and care here is unmatched."</p>
+                    <div class="patient-author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="Robert Chen" class="author-img">
+                        <div>
+                            <strong>Robert Chen</strong>
+                            <span class="text-xs text-muted block">Internal Medicine Patient</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars mb-2"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="review-text">"The telehealth video consult with Dr. Rostova for my daughter was so convenient and reassuring. Professional, clean, and genuinely compassionate care."</p>
+                    <div class="patient-author">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80" alt="Sophia Martinez" class="author-img">
+                        <div>
+                            <strong>Sophia Martinez</strong>
+                            <span class="text-xs text-muted block">Pediatrics Patient</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FREQUENTLY ASKED QUESTIONS (FAQ) -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-header text-center">
+                <span class="section-tag">FREQUENTLY ASKED QUESTIONS</span>
+                <h2>Everything You Need to Know About Your Visit</h2>
+                <p class="section-desc">Transparent answers about our clinical safety, diagnostic turnaround, E-Prescriptions, and insurance coverage.</p>
+            </div>
+
+            <div class="faq-accordion-grid">
+                <!-- Question 1 -->
+                <div class="faq-accordion-item active">
+                    <button class="faq-question-btn" type="button">
+                        <span class="faq-q-title"><i class="fa-solid fa-sparkles text-teal"></i> How does AuraMed guarantee 100% clinical cleanliness and safety?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer-content">
+                        <p>We maintain a rigorous zero-contamination clinical protocol. Every private consultation suite undergoes surgical-grade UV-C light surface sterilization and HEPA 14 air filtration between patient visits. All instruments are single-use or medical autoclave-certified, achieving a 0% hospital-acquired infection rate.</p>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="faq-accordion-item">
+                    <button class="faq-question-btn" type="button">
+                        <span class="faq-q-title"><i class="fa-solid fa-user-doctor text-primary"></i> What can I expect during my first 30-minute consultation?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer-content">
+                        <p>Your appointment is strictly unhurried. Your board-certified physician will perform a comprehensive evaluation, review your symptoms and medical history in detail, conduct necessary biometric diagnostics, and answer all your questions before co-creating your personalized care plan.</p>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="faq-accordion-item">
+                    <button class="faq-question-btn" type="button">
+                        <span class="faq-q-title"><i class="fa-solid fa-x-ray text-indigo"></i> How fast will I receive my diagnostic lab results and DICOM scans?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer-content">
+                        <p>Most routine blood panels and DICOM radiograph X-ray scans are processed on the same day. As soon as your attending radiologist signs off, your full report is securely uploaded to your digital Patient Portal and accessible on your phone.</p>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="faq-accordion-item">
+                    <button class="faq-question-btn" type="button">
+                        <span class="faq-q-title"><i class="fa-solid fa-file-prescription text-primary"></i> How do E-Prescriptions work? Can I pick them up at my pharmacy?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer-content">
+                        <p>Yes. Your doctor digitally signs your E-Prescription with a secure cryptographic signature. It is instantly transmitted electronically to your designated pharmacy (CVS, Walgreens, or direct clinic pickup) so your medications are ready when you arrive.</p>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="faq-accordion-item">
+                    <button class="faq-question-btn" type="button">
+                        <span class="faq-q-title"><i class="fa-solid fa-shield-halved text-success"></i> Is 24/7 Telehealth covered by my insurance?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer-content">
+                        <p>We accept all major health insurance providers (Blue Cross, Aetna, Cigna, UnitedHealthcare, Medicare, etc.) for both in-clinic and virtual telehealth sessions. We also offer transparent, zero-hidden-fee self-pay rates prior to booking.</p>
+                    </div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="faq-accordion-item">
+                    <button class="faq-question-btn" type="button">
+                        <span class="faq-q-title"><i class="fa-solid fa-laptop-medical text-sky"></i> How do I access my medical records after my visit?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer-content">
+                        <p>You can log into your secure Patient Portal 24/7 to download encounter SOAP notes, track blood pressure and vital trends over time, view active medications, or message your physician directly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="patient-footer">
+        <div class="container">
+            <div class="footer-top-grid">
+                <div class="footer-brand-col">
+                    <div class="brand-logo mb-3">
+                        <div class="logo-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                        <span class="brand-name">Aura<span class="accent-text">Med</span></span>
+                    </div>
+                    <p class="text-sm text-secondary">Setting the global benchmark in diagnostic precision, clinical cleanliness, and patient-centered compassionate medicine.</p>
+                    <div class="accreditation-badges mt-3">
+                        <span class="badge badge-success"><i class="fa-solid fa-certificate"></i> JCI Gold Seal</span>
+                        <span class="badge badge-info"><i class="fa-solid fa-lock"></i> HIPAA Certified</span>
+                    </div>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Clinical Services</h4>
+                    <ul>
+                        <li><a href="#">Cardiology Clinic</a></li>
+                        <li><a href="#">Neurology & MRI Diagnostics</a></li>
+                        <li><a href="#">Pediatric Care</a></li>
+                        <li><a href="#">24/7 Virtual Telehealth</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>Patient Portal</h4>
+                    <ul>
+                        <li><a href="#">Request Medical Records</a></li>
+                        <li><a href="#">Refill E-Prescription</a></li>
+                        <li><a href="#">Pay Bill Online</a></li>
+                        <li><a href="dashboard.html" class="text-primary font-semibold"><i class="fa-solid fa-user-doctor"></i> Doctor Portal Login</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact-col">
+                    <h4>Emergency & Location</h4>
+                    <p class="text-sm mb-2"><i class="fa-solid fa-location-dot text-primary"></i> 100 Medical Center Plaza, Suite 400</p>
+                    <p class="text-sm mb-2"><i class="fa-solid fa-phone text-primary"></i> 24/7 Line: (555) 019-2831</p>
+                    <p class="text-sm"><i class="fa-solid fa-clock text-primary"></i> Clinic: Mon - Sat (7:00 AM - 9:00 PM)</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom flex-between">
+                <span class="text-xs text-muted">&copy; 2026 AuraMed Health Center. All rights reserved.</span>
+                <div class="legal-links">
+                    <a href="#" class="text-xs text-muted">Privacy Policy</a> •
+                    <a href="#" class="text-xs text-muted">Terms of Service</a> •
+                    <a href="#" class="text-xs text-muted">Patient Rights</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE 3-STEP APPOINTMENT BOOKING MODAL -->
+    <div class="modal-backdrop" id="booking-modal">
+        <div class="modal-content booking-wizard-card">
+            <div class="modal-header flex-between border-bottom">
+                <div class="flex-align gap-2">
+                    <div class="logo-icon" style="width:32px;height:32px;font-size:16px;"><i class="fa-solid fa-calendar-check"></i></div>
+                    <h3 class="m-0" style="font-size:18px;">Schedule Your Consultation</h3>
+                </div>
+                <button class="close-modal-btn" id="close-booking-modal">&times;</button>
+            </div>
+
+            <div class="modal-body p-4">
+                <!-- Progress Steps -->
+                <div class="wizard-steps-bar mb-4">
+                    <div class="wizard-step active" id="step-dot-1"><span>1</span> Doctor</div>
+                    <div class="step-line"></div>
+                    <div class="wizard-step" id="step-dot-2"><span>2</span> Date & Time</div>
+                    <div class="step-line"></div>
+                    <div class="wizard-step" id="step-dot-3"><span>3</span> Patient Details</div>
+                </div>
+
+                <form id="booking-wizard-form">
+                    <!-- STEP 1: Select Doctor & Specialty -->
+                    <div class="wizard-page active" id="wizard-page-1">
+                        <label class="form-label font-semibold">Choose Specialist</label>
+                        <select class="form-control mb-3" id="modal-select-doctor">
+                            <option value="Dr. Sarah Jenkins (Cardiology)">Dr. Sarah Jenkins, MD - Cardiology ($150)</option>
+                            <option value="Dr. Marcus Vance (Neurology)">Dr. Marcus Vance, MD - Neurology ($180)</option>
+                            <option value="Dr. Elena Rostova (Pediatrics)">Dr. Elena Rostova, MD - Pediatrics ($130)</option>
+                            <option value="Dr. James Chen (Internal Medicine)">Dr. James Chen, MD - Internal Medicine ($140)</option>
+                        </select>
+
+                        <label class="form-label font-semibold">Consultation Mode</label>
+                        <div class="mode-selector-grid mb-3">
+                            <label class="mode-card active">
+                                <input type="radio" name="consultMode" value="in-person" checked>
+                                <i class="fa-solid fa-hospital text-primary"></i>
+                                <span>In-Clinic Visit</span>
+                            </label>
+                            <label class="mode-card">
+                                <input type="radio" name="consultMode" value="telehealth">
+                                <i class="fa-solid fa-video text-teal"></i>
+                                <span>24/7 Telehealth</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: Date & Time Picker -->
+                    <div class="wizard-page" id="wizard-page-2">
+                        <label class="form-label font-semibold">Select Appointment Date</label>
+                        <input type="date" class="form-control mb-3" id="modal-select-date" value="2026-08-04">
+
+                        <label class="form-label font-semibold">Available Time Slots</label>
+                        <div class="time-slots-grid mb-3">
+                            <button type="button" class="time-slot-btn active">09:00 AM</button>
+                            <button type="button" class="time-slot-btn">10:30 AM</button>
+                            <button type="button" class="time-slot-btn">11:15 AM</button>
+                            <button type="button" class="time-slot-btn">02:00 PM</button>
+                            <button type="button" class="time-slot-btn">03:30 PM</button>
+                            <button type="button" class="time-slot-btn">04:45 PM</button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: Patient Info -->
+                    <div class="wizard-page" id="wizard-page-3">
+                        <div class="form-group mb-2">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="modal-patient-name" placeholder="e.g. John Doe" required>
+                        </div>
+                        <div class="form-row-2 mb-2">
+                            <div class="form-group">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="modal-patient-phone" placeholder="(555) 000-0000" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="modal-patient-email" placeholder="john@example.com" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Reason for Visit / Symptoms</label>
+                            <textarea class="form-control" id="modal-patient-reason" rows="2" placeholder="Briefly describe your symptoms or routine checkup goals..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- CONFIRMATION PAGE -->
+                    <div class="wizard-page" id="wizard-page-confirm">
+                        <div class="text-center py-3">
+                            <div class="success-icon-circle mb-2">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <h3 class="text-success m-0">Appointment Confirmed!</h3>
+                            <p class="text-sm text-muted">A confirmation SMS & calendar invite has been dispatched.</p>
+
+                            <div class="booking-summary-box mt-3 text-left">
+                                <div><strong>Reference #:</strong> <span class="font-mono text-primary" id="confirm-ref">#AM-2026-9812</span></div>
+                                <div><strong>Doctor:</strong> <span id="confirm-doc">Dr. Sarah Jenkins</span></div>
+                                <div><strong>Date & Time:</strong> <span id="confirm-datetime">Aug 04, 2026 at 09:00 AM</span></div>
+                                <div><strong>Clinic Suite:</strong> Suite 400 (Cardiology Pavilion)</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer flex-between bg-light" id="wizard-footer">
+                <button class="btn btn-outline" id="wizard-prev-btn" style="display:none;"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                <div></div>
+                <button class="btn btn-primary" id="wizard-next-btn">Next Step <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="landing.js"></script>
+</body>
+</html>

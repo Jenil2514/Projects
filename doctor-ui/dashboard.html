@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraMed Clinical | Doctor EHR & Practice Workspace</title>
+    <meta name="description" content="A ultra-clean white clinical UI for doctors featuring patient queue management, live EHR charts, vitals monitoring, E-Prescriptions, and DICOM imaging.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for Vitals & Analytics -->
+    <script src="https://cdn.jsdelivr.net/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="clean-white-theme">
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand-logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="brand-name">Aura<span class="accent-text">Med</span></span>
+                        <span class="brand-sub">Clinical Studio</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">CLINICAL WORKSPACE</div>
+                <a href="#" class="nav-item active" data-view="dashboard" id="nav-dashboard">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Dashboard & Queue</span>
+                    <span class="badge badge-primary">18</span>
+                </a>
+                <a href="#" class="nav-item" data-view="patients" id="nav-patients">
+                    <i class="fa-solid fa-clipboard-user"></i>
+                    <span>Patient EHR Directory</span>
+                </a>
+                <a href="#" class="nav-item" data-view="prescriptions" id="nav-prescriptions">
+                    <i class="fa-solid fa-file-prescription"></i>
+                    <span>E-Prescription Studio</span>
+                </a>
+                <a href="#" class="nav-item" data-view="diagnostics" id="nav-diagnostics">
+                    <i class="fa-solid fa-x-ray"></i>
+                    <span>Diagnostics & Imaging</span>
+                    <span class="badge badge-warning">1 Alert</span>
+                </a>
+                <a href="#" class="nav-item" data-view="telehealth" id="nav-telehealth">
+                    <i class="fa-solid fa-video"></i>
+                    <span>Telehealth Rooms</span>
+                </a>
+
+                <div class="nav-section-title">PRACTICE MANAGEMENT</div>
+                <a href="#" class="nav-item" data-view="analytics" id="nav-analytics">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Practice Analytics</span>
+                </a>
+                <a href="#" class="nav-item" data-view="messages" id="nav-messages">
+                    <i class="fa-solid fa-comment-medical"></i>
+                    <span>Doctor Consults</span>
+                    <span class="badge badge-dot"></span>
+                </a>
+                <a href="#" class="nav-item" data-view="settings" id="nav-settings">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>Clinic Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="ward-status-card">
+                    <div class="ward-title">
+                        <i class="fa-solid fa-hospital"></i>
+                        <span>Cardiology Ward B</span>
+                    </div>
+                    <div class="ward-progress">
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="width: 82%;"></div>
+                        </div>
+                        <div class="ward-stats">
+                            <span>Bed Occupancy</span>
+                            <strong>82% (23/28)</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Wrapper -->
+        <div class="main-wrapper">
+            <!-- Top Navbar -->
+            <header class="top-navbar">
+                <div class="navbar-left">
+                    <button class="icon-btn sidebar-toggle" id="sidebar-toggle" title="Toggle Navigation">
+                        <i class="fa-solid fa-bars-staggered"></i>
+                    </button>
+                    <div class="search-container">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="global-search" placeholder="Search patient name, MRN #, diagnosis or prescription..." autocomplete="off">
+                        <span class="keyboard-shortcut">⌘K</span>
+                    </div>
+                </div>
+
+                <div class="navbar-right">
+                    <!-- Live Time & Status -->
+                    <div class="clinic-time-badge" id="live-clock-badge">
+                        <i class="fa-regular fa-clock"></i>
+                        <span id="live-time">17:24 PM</span>
+                        <span class="divider">|</span>
+                        <span class="clinic-shift">Day Shift</span>
+                    </div>
+
+                    <!-- Quick Action Buttons -->
+                    <a href="index.html" class="btn btn-outline" title="Return to Patient Landing Page">
+                        <i class="fa-solid fa-house text-primary"></i>
+                        <span>Patient Site</span>
+                    </a>
+
+                    <button class="btn btn-outline-danger" id="emergency-alert-btn">
+                        <i class="fa-solid fa-bell-concierge"></i>
+                        <span>Code Blue</span>
+                    </button>
+
+                    <button class="btn btn-primary" id="quick-rx-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>New E-Rx</span>
+                    </button>
+
+                    <button class="icon-btn ai-copilot-btn" id="ai-copilot-toggle" title="Toggle Clinical AI Assistant">
+                        <i class="fa-solid fa-brain"></i>
+                        <span class="ai-pulse-dot"></span>
+                    </button>
+
+                    <!-- Doctor Profile Dropdown -->
+                    <div class="doctor-profile-dropdown" id="doctor-profile-menu">
+                        <div class="doctor-avatar">
+                            <img src="doc_sarah_jenkins.jpg" alt="Dr. Sarah Jenkins">
+                            <span class="status-indicator online"></span>
+                        </div>
+                        <div class="doctor-info">
+                            <span class="doctor-name">Dr. Sarah Jenkins, MD</span>
+                            <span class="doctor-dept">Chief of Cardiology</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Dynamic Container -->
+            <main class="content-area" id="content-area">
+                <!-- VIEW 1: DASHBOARD & PATIENT QUEUE -->
+                <section class="view-section active" id="view-dashboard">
+                    <!-- Dashboard Greeting Banner -->
+                    <div class="dashboard-greeting">
+                        <div class="greeting-text">
+                            <h2>Good Afternoon, <span class="text-highlight">Dr. Jenkins</span> 🩺</h2>
+                            <p>You have <strong>6 remaining consultations</strong> today. 1 urgent diagnostic report requires your clinical sign-off.</p>
+                        </div>
+                        <div class="greeting-actions">
+                            <div class="status-pill-group">
+                                <span class="status-pill active"><i class="fa-solid fa-circle"></i> Available for Consult</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Metrics Summary Grid -->
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-icon primary">
+                                <i class="fa-solid fa-user-doctor"></i>
+                            </div>
+                            <div class="metric-data">
+                                <span class="metric-label">Today's Visits</span>
+                                <div class="metric-value-group">
+                                    <span class="metric-value">18</span>
+                                    <span class="metric-change positive"><i class="fa-solid fa-arrow-trend-up"></i> +12%</span>
+                                </div>
+                                <span class="metric-sub font-mono">12 Completed • 6 Pending</span>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon warning">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div class="metric-data">
+                                <span class="metric-label">Waiting Room</span>
+                                <div class="metric-value-group">
+                                    <span class="metric-value">3</span>
+                                    <span class="metric-sub-badge warning">Avg Wait: 12 min</span>
+                                </div>
+                                <span class="metric-sub">Next: Eleanor Vance (ECG)</span>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon danger">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </div>
+                            <div class="metric-data">
+                                <span class="metric-label">Urgent Diagnostics</span>
+                                <div class="metric-value-group">
+                                    <span class="metric-value">1 Alert</span>
+                                    <span class="metric-change negative">Requires Review</span>
+                                </div>
+                                <span class="metric-sub">Patient: Robert Chen (Chest X-Ray)</span>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon success">
+                                <i class="fa-solid fa-receipt"></i>
+                            </div>
+                            <div class="metric-data">
+                                <span class="metric-label">E-Prescriptions Today</span>
+                                <div class="metric-value-group">
+                                    <span class="metric-value">14</span>
+                                    <span class="metric-change positive"><i class="fa-solid fa-check"></i> All Signed</span>
+                                </div>
+                                <span class="metric-sub">Auto-sent to Local Pharmacy</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Grid Split: Queue + Patient Quick Snapshot -->
+                    <div class="dashboard-split-grid">
+                        <!-- Left Queue Column -->
+                        <div class="card patient-queue-card">
+                            <div class="card-header flex-between">
+                                <div class="card-title-group">
+                                    <h3><i class="fa-solid fa-list-check"></i> Patient Consult Queue</h3>
+                                    <span class="badge badge-light" id="queue-count-badge">6 Active Patients</span>
+                                </div>
+
+                                <div class="filter-tabs" id="queue-filter-tabs">
+                                    <button class="tab-btn active" data-filter="all">All (6)</button>
+                                    <button class="tab-btn" data-filter="waiting">Waiting (3)</button>
+                                    <button class="tab-btn" data-filter="in-room">In Room (1)</button>
+                                    <button class="tab-btn" data-filter="telehealth">Telehealth (2)</button>
+                                </div>
+                            </div>
+
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="clean-table" id="queue-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Time</th>
+                                                <th>Patient Details</th>
+                                                <th>Vitals & Symptoms</th>
+                                                <th>Consult Type</th>
+                                                <th>Status</th>
+                                                <th class="text-right">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="queue-table-body">
+                                            <!-- Injected via JavaScript -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Panel: Currently Active Patient Spotlight & Schedule -->
+                        <div class="dashboard-side-column">
+                            <!-- Selected Patient Spotlight Card -->
+                            <div class="card active-patient-spotlight" id="spotlight-card">
+                                <div class="card-header border-bottom flex-between">
+                                    <span class="card-subtitle"><i class="fa-solid fa-hospital-user"></i> Active Patient Chart</span>
+                                    <span class="badge badge-success" id="spotlight-status-badge">In Examination Room 2</span>
+                                </div>
+                                <div class="card-body" id="spotlight-content">
+                                    <!-- Dynamic Spotlight Patient Info -->
+                                </div>
+                                <div class="card-footer bg-light flex-between">
+                                    <button class="btn btn-sm btn-outline" id="spotlight-rx-btn">
+                                        <i class="fa-solid fa-prescription-bottle-medical"></i> Quick Rx
+                                    </button>
+                                    <button class="btn btn-sm btn-primary" id="open-full-ehr-btn">
+                                        <i class="fa-solid fa-folder-open"></i> Launch Full EHR Chart
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Today's Schedule Timeline -->
+                            <div class="card schedule-timeline-card">
+                                <div class="card-header flex-between">
+                                    <h3><i class="fa-regular fa-calendar-check"></i> Today's Schedule</h3>
+                                    <span class="text-muted text-sm">Aug 02, 2026</span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="timeline" id="today-timeline">
+                                        <!-- Injected via JS -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW 2: FULL PATIENT EHR WORKSPACE -->
+                <section class="view-section" id="view-patients">
+                    <div class="ehr-workspace">
+                        <!-- EHR Header Patient Info Bar -->
+                        <div class="ehr-patient-bar" id="ehr-header-bar">
+                            <div class="ehr-patient-profile">
+                                <div class="ehr-avatar">
+                                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80" alt="Patient Avatar" id="ehr-patient-avatar">
+                                    <span class="blood-badge" id="ehr-patient-blood">O+</span>
+                                </div>
+                                <div class="ehr-details">
+                                    <div class="ehr-name-row">
+                                        <h2 id="ehr-patient-name">Eleanor Vance</h2>
+                                        <span class="patient-id-tag" id="ehr-patient-mrn">MRN: #MED-8842</span>
+                                        <span class="badge badge-danger" id="ehr-patient-risk">High Cardiovascular Risk</span>
+                                    </div>
+                                    <div class="ehr-meta-row">
+                                        <span><i class="fa-solid fa-user"></i> <span id="ehr-patient-demo">64 yrs, Female</span></span>
+                                        <span class="divider">•</span>
+                                        <span><i class="fa-solid fa-phone"></i> <span id="ehr-patient-phone">+1 (555) 234-8901</span></span>
+                                        <span class="divider">•</span>
+                                        <span><i class="fa-solid fa-triangle-exclamation text-danger"></i> Allergies: <strong class="text-danger" id="ehr-patient-allergies">Penicillin (Severe), Shellfish</strong></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ehr-bar-actions">
+                                <button class="btn btn-outline" id="ehr-back-btn">
+                                    <i class="fa-solid fa-arrow-left"></i> Back to Queue
+                                </button>
+                                <button class="btn btn-primary" id="ehr-prescribe-btn">
+                                    <i class="fa-solid fa-file-prescription"></i> Write Prescription
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- EHR Tabbed Content -->
+                        <div class="ehr-tabs-container">
+                            <div class="ehr-tabs-header">
+                                <button class="ehr-tab active" data-ehr-tab="vitals"><i class="fa-solid fa-heart-pulse"></i> Vitals & Biometrics</button>
+                                <button class="ehr-tab" data-ehr-tab="notes"><i class="fa-solid fa-notes-medical"></i> SOAP Notes</button>
+                                <button class="ehr-tab" data-ehr-tab="rx"><i class="fa-solid fa-pills"></i> Medications & History</button>
+                                <button class="ehr-tab" data-ehr-tab="imaging"><i class="fa-solid fa-x-ray"></i> Imaging & Labs</button>
+                                <button class="ehr-tab" data-ehr-tab="ai"><i class="fa-solid fa-brain"></i> AI Clinical Insights</button>
+                            </div>
+
+                            <div class="ehr-tabs-body">
+                                <!-- TAB 1: VITALS & BIOMETRICS -->
+                                <div class="ehr-tab-content active" id="ehr-tab-vitals">
+                                    <div class="vitals-cards-grid">
+                                        <div class="vital-card">
+                                            <div class="vital-header">
+                                                <span class="vital-title">Heart Rate</span>
+                                                <i class="fa-solid fa-heart-pulse vital-icon text-danger"></i>
+                                            </div>
+                                            <div class="vital-body">
+                                                <span class="vital-value" id="vital-hr-val">78</span>
+                                                <span class="vital-unit">BPM</span>
+                                                <span class="vital-status status-normal"><i class="fa-solid fa-check"></i> Normal (60-100)</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="vital-card warning-border">
+                                            <div class="vital-header">
+                                                <span class="vital-title">Blood Pressure</span>
+                                                <i class="fa-solid fa-stethoscope vital-icon text-warning"></i>
+                                            </div>
+                                            <div class="vital-body">
+                                                <span class="vital-value" id="vital-bp-val">138/88</span>
+                                                <span class="vital-unit">mmHg</span>
+                                                <span class="vital-status status-warning"><i class="fa-solid fa-triangle-exclamation"></i> Stage 1 HTN</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="vital-card">
+                                            <div class="vital-header">
+                                                <span class="vital-title">Oxygen Saturation</span>
+                                                <i class="fa-solid fa-lungs vital-icon text-primary"></i>
+                                            </div>
+                                            <div class="vital-body">
+                                                <span class="vital-value" id="vital-spo2-val">98%</span>
+                                                <span class="vital-unit">SpO2</span>
+                                                <span class="vital-status status-normal"><i class="fa-solid fa-check"></i> Optimal</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="vital-card">
+                                            <div class="vital-header">
+                                                <span class="vital-title">Body Temp</span>
+                                                <i class="fa-solid fa-temperature-half vital-icon text-info"></i>
+                                            </div>
+                                            <div class="vital-body">
+                                                <span class="vital-value" id="vital-temp-val">98.6</span>
+                                                <span class="vital-unit">°F</span>
+                                                <span class="vital-status status-normal"><i class="fa-solid fa-check"></i> Afebrile</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Vitals Chart Canvas Card -->
+                                    <div class="card chart-card mt-4">
+                                        <div class="card-header flex-between">
+                                            <h3><i class="fa-solid fa-chart-line"></i> 24-Hour Continuous Cardiac & BP Trend</h3>
+                                            <div class="btn-group-sm">
+                                                <button class="btn btn-sm btn-outline active">24 Hours</button>
+                                                <button class="btn btn-sm btn-outline">7 Days</button>
+                                                <button class="btn btn-sm btn-outline">1 Month</button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="chart-wrapper">
+                                                <canvas id="vitalsTrendChart"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- TAB 2: SOAP NOTES -->
+                                <div class="ehr-tab-content" id="ehr-tab-notes">
+                                    <div class="soap-notes-container">
+                                        <div class="soap-templates-bar">
+                                            <span>Quick Clinical Templates:</span>
+                                            <button class="btn btn-xs btn-outline" onclick="insertSoapTemplate('hypertension')">+ HTN Follow-Up</button>
+                                            <button class="btn btn-xs btn-outline" onclick="insertSoapTemplate('cardiac')">+ Chest Pain Evaluation</button>
+                                            <button class="btn btn-xs btn-outline" onclick="insertSoapTemplate('routine')">+ Routine Annual Checkup</button>
+                                        </div>
+
+                                        <div class="soap-grid">
+                                            <div class="soap-box">
+                                                <label class="soap-label"><span class="soap-letter">S</span> Subjective (Patient Complaints)</label>
+                                                <textarea id="soap-subjective" rows="4" placeholder="Patient reports mild palpitations over past 3 days after morning coffee. Denies shortness of breath or chest radiation pain..."></textarea>
+                                            </div>
+
+                                            <div class="soap-box">
+                                                <label class="soap-label"><span class="soap-letter">O</span> Objective (Clinical Findings & Exam)</label>
+                                                <textarea id="soap-objective" rows="4" placeholder="Vitals: BP 138/88 mmHg, HR 78 bpm regular rhythm. S1 and S2 present, no murmurs, gallops, or rubs noted. Lungs clear to auscultation bilaterally..."></textarea>
+                                            </div>
+
+                                            <div class="soap-box">
+                                                <label class="soap-label"><span class="soap-letter">A</span> Assessment (Diagnosis & Impressions)</label>
+                                                <textarea id="soap-assessment" rows="4" placeholder="1. Stage 1 Essential Hypertension - suboptimal control on current monotherapy. 2. Benign Caffeine-Induced Palpitations."></textarea>
+                                            </div>
+
+                                            <div class="soap-box">
+                                                <label class="soap-label"><span class="soap-letter">P</span> Plan (Treatment & Follow-Up)</label>
+                                                <textarea id="soap-plan" rows="4" placeholder="1. Adjust Lisinopril from 10mg daily to 20mg daily. 2. Order 24-hr Holter Monitor & Fasting Lipid Panel. 3. Follow-up consultation in 2 weeks."></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="soap-actions flex-between mt-3">
+                                            <span class="text-sm text-muted"><i class="fa-solid fa-cloud-arrow-up"></i> Auto-saved at 17:23:45</span>
+                                            <button class="btn btn-primary" id="save-soap-btn">
+                                                <i class="fa-solid fa-floppy-disk"></i> Save & Sign Encounter Notes
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- TAB 3: MEDICATIONS & HISTORY -->
+                                <div class="ehr-tab-content" id="ehr-tab-rx">
+                                    <div class="meds-layout">
+                                        <div class="card">
+                                            <div class="card-header flex-between">
+                                                <h3><i class="fa-solid fa-pills"></i> Current Active Prescriptions</h3>
+                                                <button class="btn btn-sm btn-primary" id="add-medication-btn">
+                                                    <i class="fa-solid fa-plus"></i> Add Medication
+                                                </button>
+                                            </div>
+                                            <div class="card-body p-0">
+                                                <table class="clean-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Medication</th>
+                                                            <th>Dosage</th>
+                                                            <th>Frequency</th>
+                                                            <th>Started</th>
+                                                            <th>Status</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="active-meds-table">
+                                                        <tr>
+                                                            <td>
+                                                                <strong>Lisinopril</strong>
+                                                                <div class="text-xs text-muted">ACE Inhibitor</div>
+                                                            </td>
+                                                            <td>10 mg</td>
+                                                            <td>Once Daily (Morning)</td>
+                                                            <td>Jan 12, 2026</td>
+                                                            <td><span class="badge badge-success">Active</span></td>
+                                                            <td><button class="btn btn-xs btn-outline-danger">Discontinue</button></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <strong>Atorvastatin</strong>
+                                                                <div class="text-xs text-muted">Statin / Lipid Control</div>
+                                                            </td>
+                                                            <td>20 mg</td>
+                                                            <td>Once Daily (Bedtime)</td>
+                                                            <td>Mar 04, 2026</td>
+                                                            <td><span class="badge badge-success">Active</span></td>
+                                                            <td><button class="btn btn-xs btn-outline-danger">Discontinue</button></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- TAB 4: IMAGING & LABS -->
+                                <div class="ehr-tab-content" id="ehr-tab-imaging">
+                                    <div class="dicom-viewer-container">
+                                        <div class="dicom-toolbar">
+                                            <div class="toolbar-group">
+                                                <button class="tool-btn active" id="tool-pan" title="Pan / Move"><i class="fa-solid fa-hand"></i></button>
+                                                <button class="tool-btn" id="tool-zoom-in" title="Zoom In"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                                                <button class="tool-btn" id="tool-zoom-out" title="Zoom Out"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+                                                <button class="tool-btn" id="tool-contrast" title="Adjust Contrast"><i class="fa-solid fa-circle-half-stroke"></i></button>
+                                                <button class="tool-btn" id="tool-invert" title="Invert Colors"><i class="fa-solid fa-eye"></i></button>
+                                                <button class="tool-btn" id="tool-reset" title="Reset View"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+                                            </div>
+                                            <div class="dicom-info-tag">
+                                                <span>Study: <strong>PA Chest Radiograph</strong> (Aug 01, 2026)</span>
+                                                <span class="badge badge-success">DICOM 3.0 Verified</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="dicom-stage" id="dicom-stage">
+                                            <img src="chest_xray.jpg" alt="Chest Radiograph X-Ray Scan" id="dicom-image" class="dicom-img">
+                                            <div class="dicom-overlay-stats">
+                                                <div>PATIENT: VANCE, ELEANOR</div>
+                                                <div>DOB: 11/04/1962 (64Y)</div>
+                                                <div>TECH: 120kVp, 3.2mAs</div>
+                                                <div>LATERALITY: POSTEROANTERIOR</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="dicom-radiologist-report">
+                                            <h4><i class="fa-solid fa-file-waveform"></i> Attending Radiologist Findings</h4>
+                                            <p>Lungs are clear of focal consolidation, effusion, or pneumothorax. Cardiomegaly is borderline with mild left ventricular enlargement. Osseous structures are within normal limits for age.</p>
+                                            <div class="report-meta">
+                                                <span>Signed by: <strong>Dr. Marcus Vance, MD (Radiology)</strong></span>
+                                                <span>Verified: Yesterday 14:15 PM</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- TAB 5: AI CLINICAL INSIGHTS -->
+                                <div class="ehr-tab-content" id="ehr-tab-ai">
+                                    <div class="ai-insights-panel">
+                                        <div class="ai-insight-card highlight-card">
+                                            <div class="ai-card-header">
+                                                <i class="fa-solid fa-sparkles ai-icon"></i>
+                                                <h3>AuraMed AI Diagnostic Assistant Summary</h3>
+                                                <span class="badge badge-primary">Confidence Score: 94%</span>
+                                            </div>
+                                            <div class="ai-card-body">
+                                                <p>Based on Eleanor Vance's recent vitals (BP 138/88 mmHg), elevated BMI (28.4), and family cardiac history:</p>
+                                                <ul class="ai-bullet-list">
+                                                    <li><i class="fa-solid fa-triangle-exclamation text-warning"></i> <strong>Hypertension Dose Escalation Recommended:</strong> Current Lisinopril 10mg monotherapy shows persistent mild systolic elevation over 3 consecutive visits. Consider titration to 20mg or adding Hydrochlorothiazide 12.5mg.</li>
+                                                    <li><i class="fa-solid fa-shield-halved text-success"></i> <strong>Drug Interaction Alert:</strong> No cross-reactivity detected between current meds and recommended Lisinopril adjustment.</li>
+                                                    <li><i class="fa-solid fa-circle-info text-info"></i> <strong>Preventive Care Due:</strong> Annual Fasting Lipid Panel & HbA1c screening is due this month.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW 3: E-PRESCRIPTION STUDIO VIEW -->
+                <section class="view-section" id="view-prescriptions">
+                    <div class="rx-studio-container card">
+                        <div class="card-header flex-between">
+                            <div class="title-group">
+                                <h2><i class="fa-solid fa-file-prescription text-primary"></i> E-Prescription Creator Studio</h2>
+                                <p class="text-muted text-sm">Issue digitally signed, tamper-proof e-prescriptions directly to regional pharmacies.</p>
+                            </div>
+                            <button class="btn btn-outline" id="rx-clear-btn"><i class="fa-solid fa-rotate-left"></i> Reset Form</button>
+                        </div>
+                        <div class="card-body">
+                            <form id="rx-creator-form">
+                                <div class="form-row-2">
+                                    <div class="form-group">
+                                        <label class="form-label">Select Patient</label>
+                                        <select class="form-control" id="rx-patient-select">
+                                            <option value="1">Eleanor Vance (MRN: #MED-8842) - 64F</option>
+                                            <option value="2">Robert Chen (MRN: #MED-9921) - 48M</option>
+                                            <option value="3">Sophia Martinez (MRN: #MED-4410) - 31F</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Preferred Pharmacy</label>
+                                        <select class="form-control" id="rx-pharmacy-select">
+                                            <option value="1">CVS Pharmacy - 4th Ave Branch (E-Send Enabled)</option>
+                                            <option value="2">Walgreens Specialty Pharmacy (Main St)</option>
+                                            <option value="3">Patient Direct Pickup (Print Rx Paper)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="prescribed-items-section mt-4">
+                                    <div class="flex-between mb-2">
+                                        <h4><i class="fa-solid fa-pills"></i> Prescribed Medications</h4>
+                                        <button type="button" class="btn btn-sm btn-outline-primary" id="rx-add-line-btn">+ Add Drug Line</button>
+                                    </div>
+
+                                    <table class="clean-table" id="rx-items-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Drug Name & Strength</th>
+                                                <th>Dosage / Form</th>
+                                                <th>Frequency</th>
+                                                <th>Duration</th>
+                                                <th>Special Refill & Instructions</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="rx-items-body">
+                                            <tr>
+                                                <td><input type="text" class="form-control" value="Lisinopril 20mg Tablet" placeholder="Search drug..."></td>
+                                                <td><input type="text" class="form-control" value="1 Oral Tablet" placeholder="e.g. 1 Tablet"></td>
+                                                <td>
+                                                    <select class="form-control">
+                                                        <option selected>Once Daily (Morning)</option>
+                                                        <option>Twice Daily (BID)</option>
+                                                        <option>Every 8 Hours (TID)</option>
+                                                        <option>As Needed (PRN)</option>
+                                                    </select>
+                                                </td>
+                                                <td><input type="text" class="form-control" value="30 Days (Qty: 30)"></td>
+                                                <td><input type="text" class="form-control" value="Take with water after breakfast. Refills: 3"></td>
+                                                <td><button type="button" class="btn btn-xs btn-outline-danger remove-rx-row"><i class="fa-solid fa-trash"></i></button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="form-actions flex-between mt-4">
+                                    <div class="doctor-signature-preview">
+                                        <i class="fa-solid fa-signature"></i> Digital Signature Attached: <strong>Dr. Sarah Jenkins (Lic #MD-994812)</strong>
+                                    </div>
+                                    <button type="button" class="btn btn-primary btn-lg" id="generate-prescription-modal-btn">
+                                        <i class="fa-solid fa-print"></i> Generate Printable E-Prescription
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW 4: DIAGNOSTICS HUB VIEW -->
+                <section class="view-section" id="view-diagnostics">
+                    <div class="diagnostics-page-grid">
+                        <div class="card">
+                            <div class="card-header flex-between">
+                                <h3><i class="fa-solid fa-flask"></i> Diagnostic Orders & Lab Reports</h3>
+                                <span class="badge badge-warning">1 Critical Alert</span>
+                            </div>
+                            <div class="card-body p-0">
+                                <table class="clean-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Patient</th>
+                                            <th>Test Type</th>
+                                            <th>Date & Time</th>
+                                            <th>Result Summary</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="table-warning-row">
+                                            <td><strong>Robert Chen</strong> (48M)</td>
+                                            <td>12-Lead Electrocardiogram (ECG)</td>
+                                            <td>Today, 14:10 PM</td>
+                                            <td><span class="text-danger font-semibold">ST Elevation noted in V2-V4</span></td>
+                                            <td><span class="badge badge-danger">CRITICAL ALERT</span></td>
+                                            <td><button class="btn btn-xs btn-primary">Review Scan</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Eleanor Vance</strong> (64F)</td>
+                                            <td>PA Chest Radiograph (X-Ray)</td>
+                                            <td>Aug 01, 2026</td>
+                                            <td>Borderline Cardiomegaly, Lungs Clear</td>
+                                            <td><span class="badge badge-success">Completed</span></td>
+                                            <td><button class="btn btn-xs btn-outline" onclick="openEhrWithTab('imaging')">View DICOM</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Sophia Martinez</strong> (31F)</td>
+                                            <td>Comprehensive Metabolic Panel</td>
+                                            <td>Aug 01, 2026</td>
+                                            <td>All electrolytes within normal range</td>
+                                            <td><span class="badge badge-success">Completed</span></td>
+                                            <td><button class="btn btn-xs btn-outline">View Report</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW 5: TELEHEALTH ROOMS VIEW -->
+                <section class="view-section" id="view-telehealth">
+                    <div class="telehealth-container card">
+                        <div class="card-header flex-between">
+                            <h3><i class="fa-solid fa-video text-primary"></i> Doctor Telehealth Virtual Clinic</h3>
+                            <span class="badge badge-success">Encrypted Peer-to-Peer HD Stream</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="telehealth-grid">
+                                <div class="video-main-screen">
+                                    <div class="video-placeholder">
+                                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop&q=80" alt="Telehealth Consultation" class="telehealth-img">
+                                        <div class="video-overlay-badge">
+                                            <span class="rec-dot"></span> LIVE • Patient: Sophia Martinez
+                                        </div>
+                                        <div class="video-controls-bar">
+                                            <button class="v-btn"><i class="fa-solid fa-microphone"></i></button>
+                                            <button class="v-btn"><i class="fa-solid fa-video"></i></button>
+                                            <button class="v-btn btn-danger"><i class="fa-solid fa-phone-slash"></i></button>
+                                            <button class="v-btn"><i class="fa-solid fa-desktop"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW 6: PRACTICE ANALYTICS -->
+                <section class="view-section" id="view-analytics">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-chart-line"></i> Practice & Clinical Performance Analytics</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-wrapper" style="height: 350px;">
+                                <canvas id="practiceAnalyticsChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- E-PRESCRIPTION PRINTABLE MODAL -->
+    <div class="modal-backdrop" id="rx-modal">
+        <div class="modal-content rx-printable-paper">
+            <div class="modal-header border-none flex-between">
+                <div class="rx-header-logo">
+                    <i class="fa-solid fa-heart-pulse text-primary text-2xl"></i>
+                    <div>
+                        <h2 class="m-0">AuraMed Specialist Cardiology Clinic</h2>
+                        <span class="text-xs text-muted">100 Medical Center Plaza, Suite 400 • Phone: (555) 019-2831</span>
+                    </div>
+                </div>
+                <button class="close-modal-btn" id="close-rx-modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="rx-watermark">Rx</div>
+
+                <div class="rx-meta-box">
+                    <div class="rx-meta-row">
+                        <div><strong>Patient Name:</strong> <span id="modal-rx-patient">Eleanor Vance</span></div>
+                        <div><strong>Age/Gender:</strong> 64 yrs / Female</div>
+                        <div><strong>Date:</strong> <span id="modal-rx-date">August 02, 2026</span></div>
+                    </div>
+                    <div class="rx-meta-row">
+                        <div><strong>MRN #:</strong> #MED-8842</div>
+                        <div><strong>Allergies:</strong> <span class="text-danger font-semibold">Penicillin (Severe)</span></div>
+                        <div><strong>Rx No:</strong> #RX-2026-98124</div>
+                    </div>
+                </div>
+
+                <div class="rx-symbol">Rx</div>
+
+                <div class="rx-drugs-list" id="modal-rx-drugs-list">
+                    <!-- Dynamic drugs content -->
+                </div>
+
+                <div class="rx-footer-grid">
+                    <div class="rx-qr-code">
+                        <i class="fa-solid fa-qrcode text-5xl text-slate-700"></i>
+                        <span class="text-xs text-muted block mt-1">Scan for Pharmacy Verification</span>
+                    </div>
+
+                    <div class="rx-sig-block">
+                        <div class="sig-line"></div>
+                        <strong>Dr. Sarah Jenkins, MD</strong>
+                        <div class="text-xs text-muted">Lic #MD-994812 • Board Certified Cardiology</div>
+                        <div class="text-xs text-primary mt-1"><i class="fa-solid fa-certificate"></i> Digital Cryptographic Signature Verified</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer flex-between">
+                <button class="btn btn-outline" id="close-modal-bottom-btn">Close</button>
+                <button class="btn btn-primary" onclick="window.print()"><i class="fa-solid fa-print"></i> Print / Save PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CODE BLUE EMERGENCY MODAL -->
+    <div class="modal-backdrop" id="emergency-modal">
+        <div class="modal-content alert-modal">
+            <div class="modal-header bg-danger text-white">
+                <h3><i class="fa-solid fa-triangle-exclamation"></i> Emergency Clinical Alert (Code Blue)</h3>
+                <button class="close-modal-btn text-white" id="close-emergency-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="font-semibold text-lg text-slate-900">Broadcast immediate resuscitation / emergency team to location:</p>
+                <select class="form-control form-control-lg mt-2" id="emergency-room-select">
+                    <option>Exam Room 2 (Patient: Eleanor Vance - Acute Distress)</option>
+                    <option>Cardiology Ward B - Bed 14</option>
+                    <option>Outpatient Waiting Lounge</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="cancel-emergency-btn">Cancel</button>
+                <button class="btn btn-danger btn-lg" id="confirm-emergency-btn"><i class="fa-solid fa-bullhorn"></i> Broadcast Emergency Alert</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
